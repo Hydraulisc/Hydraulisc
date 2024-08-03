@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydraulisc</title>
+    <meta property="og:title" content="Hydraulisc - Stay in the loop">
+    <meta property="og:description" content="Welcome to Hydraulisc. Sign in or Sign up to join our incredible community!">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/144374735">
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together!">
+    <meta property="og:site_name" content="Hydraulisc - Stay in the loop">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <%- include('../partials/header', { username: username, uid: uid }) %>
+      
+    <div class="body_main">
+        <div id="home-wrapper" style="align-items: center; width: 85%; max-width: 1280px; justify-content: space-between; margin-left: auto; margin-right: auto; padding-top: 80px; padding-bottom: 80px; display: flex; flex-direction: column; text-align: center;">
+            <div id="home-left">
+                <img src="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png" alt="Hydraulisc Logo" style="width: 200px; height: auto; margin-bottom: 20px;">
+                <h1 id="home-heading" style="font-size: 48px; font-weight: 800; line-height: 120%; margin-top: 0; margin-bottom: 32px;">Stay in The Loop.</h1>
+                <a style="background-color: #d1087a; padding: 20px 40px; border-radius: 8px; color: white; text-decoration: none; text-transform: uppercase; font-weight: 600; font-size: 18px; transition: background-color 0.3s ease-in-out;" href="/auth?utm_src=temp%20one&utm_source=temp%20one">Join the Beta</a>
+            </div>
+        </div>
+        <div style="align-items: center; width: 85%; margin-left: auto; margin-right: auto; max-width: 1280px; justify-content: space-between; padding-bottom: 80px; display: flex;">
+            <div class="promoOne" style="align-items: left;">
+                <h3>Supported on All Devices</h3>
+                <img src="https://res.cloudinary.com/daevtrjou/image/upload/v1705518810/1000008452-picsay.webp.webp" alt="promotional image one" style="max-width: 300px; max-height: 300px; width: auto; height: auto;">
+            </div>
+            <div class="promoTwo" style="align-items: right;">
+                <h3>5-Way Cryptographically Encrypted Private Messages</h3>
+                <img src="https://res.cloudinary.com/daevtrjou/image/upload/v1703175840/Screen%20Shot%202023-12-21%20at%2015.48.37.png.png" alt="promotional image two" style="max-width: 300px; max-height: 300px; width: auto; height: auto;">
+            </div>
+        </div>
+        <div class="ponggame nomobilesupport" style="align-items: center; width: 85%; max-width: 1280px; justify-content: space-between; margin-left: auto; margin-right: auto; padding-top: 100px; padding-bottom: 80px; display: flex; flex-direction: column; text-align: center;">
+            <p id="presstostarttext">Press Space to Start</p>
+            <canvas id="mainCanvas" width="480" height="320" style="border: 1px solid white; padding: 1.3px; border-radius: 5px;"></canvas>
+            <script>
+                var canvas = document.getElementById("mainCanvas");
+                var ctx = canvas.getContext("2d");
+                var ballRadius = 10;
+                var x = canvas.width / 2;
+                var y = canvas.height - 30;
+                var dx = 2;
+                var dy = -2;
+                var paddleHeight = 10;
+                var paddleWidth = 75;
+                var paddleX = (canvas.width - paddleWidth) / 2;
+                var interval; // Added the 'interval' variable
+                var rightPressed = false; // Added variable for tracking right arrow key press
+                var leftPressed = false; // Added variable for tracking left arrow key press
+                const brickRowCount = Math.floor(Math.random() * 5) + 1;
+                const brickColumnCount = Math.floor(Math.random() * 5) + 1;
+                const brickWidth = 70;
+                const brickHeight = 20;
+                const brickPadding = 10;
+                const brickOffsetTop = 30;
+                const brickOffsetLeft = 30;
+                var gameStarted = false; // Flag to track if the game has started
+
+                // Corrected the syntax for initializing the bricks array
+                const bricks = [];
+                for (let c = 0; c < brickColumnCount; c++) {
+                    bricks[c] = [];
+                    for (let r = 0; r < brickRowCount; r++) {
+                        bricks[c][r] = { x: 0, y: 0, status: 1 };
+                    }
+                }
+
+                document.addEventListener("keydown", keyDownHandler, false);
+                document.addEventListener("keyup", keyUpHandler, false);
+
+                function keyDownHandler(e) {
+                    if (e.key == "Right" || e.key == "ArrowRight") {
+                        rightPressed = true;
+                    } else if (e.key == "Left" || e.key == "ArrowLeft") {
+                        leftPressed = true;
+                    }
+                }
+
+                function keyUpHandler(e) {
+                    if (e.key == "Right" || e.key == "ArrowRight") {
+                        rightPressed = false;
+                    } else if (e.key == "Left" || e.key == "ArrowLeft") {
+                        leftPressed = false;
+                    }
+                }
+
+                function drawBall() {
+                    ctx.beginPath();
+                    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = "#AEC6CF";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                function drawPaddle() {
+                    ctx.beginPath();
+                    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+                    ctx.fillStyle = "#77DD77";
+                    ctx.fill();
+                    ctx.closePath();
+                }
+
+                function drawBricks() {
+                    for (let c = 0; c < brickColumnCount; c++) {
+                        for (let r = 0; r < brickRowCount; r++) {
+                            if (bricks[c][r].status === 1) {
+                                const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+                                const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+                                bricks[c][r].x = brickX;
+                                bricks[c][r].y = brickY;
+                                ctx.beginPath();
+                                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                                ctx.fillStyle = "#0095DD";
+                                ctx.fill();
+                                ctx.closePath();
+                            }
+                        }
+                    }
+                }
+
+                function collisionDetection() {
+                    for (let c = 0; c < brickColumnCount; c++) {
+                        for (let r = 0; r < brickRowCount; r++) {
+                            const b = bricks[c][r];
+                            if (b.status === 1) {
+                                if (
+                                    x > b.x &&
+                                    x < b.x + brickWidth &&
+                                    y > b.y &&
+                                    y < b.y + brickHeight
+                                ) {
+                                    dy = -dy;
+                                    b.status = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawBricks();
+                    drawBall();
+                    drawPaddle();
+                    collisionDetection(); // Added collision detection
+
+                    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                        dx = -dx;
+                    }
+                    if (y + dy < ballRadius) {
+                        dy = -dy;
+                    } else if (y + dy > canvas.height - ballRadius) {
+                        if (x > paddleX && x < paddleX + paddleWidth) {
+                            dy = -dy;
+                        } else {
+                            // Game over sequence
+                            ctx.font = "24px Arial";
+                            ctx.fillStyle = "#000";
+                            ctx.fillText("GAME OVER", canvas.width / 2 - 70, canvas.height / 2);
+                            document.getElementById('presstostarttext').innerText = 'GAME OVER';
+                            clearInterval(interval); // Stop the game loop
+                        }
+                    }
+
+                    // Move paddle based on keyboard input
+                    if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                        paddleX += 3; // Adjusted paddle movement speed
+                    } else if (leftPressed && paddleX > 0) {
+                        paddleX -= 3; // Adjusted paddle movement speed
+                    }
+
+                    x += dx;
+                    y += dy;
+
+                    if (!gameStarted) {
+                        document.getElementById('presstostarttext').innerText = 'Press Space to Start';
+                        ctx.font = "24px Arial";
+                        ctx.fillStyle = "#fff";
+                        ctx.fillText("Press Space to Start", canvas.width / 2 - 120, canvas.height / 2);
+                    }
+                }
+
+                document.addEventListener("keydown", function (e) {
+                    if (e.code === "Space" && !gameStarted) {
+                        document.getElementById('presstostarttext').innerText = 'Controls: Left/Right arrows';
+                        interval = setInterval(draw, 10); // Start the game loop
+                        gameStarted = true;
+                    }
+                });
+            </script>
+        </div>
+    </div>
+
+
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+
+</html>

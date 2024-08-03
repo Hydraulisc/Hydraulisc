@@ -1,0 +1,24 @@
+<% if(!cookies) { %>
+    <div id="cookcons" style="display: flex; width: 100%; height: 100%; align-items: center; flex-direction: column; justify-content: center; background-size: cover; background-position: center; color: whitesmoke; position: absolute; top: 0px; left: 0px; z-index: 99999; background: rgba(0, 0, 0, 0.95);">
+        <div style="border: solid 5px black; text-align: center; padding: 48px 26px 24px;  background-color: black; overflow: visible; box-sizing: border-box; display: block; max-width: 800px; cursor: default;">
+            <h2>Cookie Consent</h2>
+            <p>By continuing your use of this site, you agree that we may store and/or access information on your device, such as unique IDs in cookies to process personal data (authorization cookies). You may accept by clicking below, or manage your choices, including your right to object where legitimate interest is used, at any time, in the cookie manager. Your choices will be kept synced between your device and our server, transferred over HTTPS.</p>
+            <p>For privacy reasons, we will prompt you with Cookie Reminders, in the form of Cookie Consent popups, much like this one.</p>
+            <h2>Right to Object</h2>
+            <p>As mentioned above, you have the right to object where legitimate interest is used, at any time. Manage these settings and more from the cookie manager, or directly refuse by discontinuing your use of this site.</p>
+            <button style="border: none; background-color: green; color: white; text-transform: uppercase; font-weight: 600; cursor: pointer; padding: 8px; margin-right: 8px;" onclick="acceptCookie()">Accept Cookies</button>
+            <button style="border: none; background-color: #04050a; color: white; text-transform: uppercase; font-weight: 600; cursor: pointer; padding: 8px; margin-left: 8px;" onclick="location.href='/';">More Info</button>
+        </div>
+    </div>
+    <script>
+    function acceptCookie() {
+        var expirationDate = new Date();
+        expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+        document.cookie = "acceptCookie=" + true + "; expires=" + expirationDate.toUTCString() + "; SameSite=Strict";
+        document.getElementById("cookcons").style.display = 'none';
+        document.body.style.overflow = 'visible';
+    }
+    </script>
+<% } else { %>
+    <div style="display: none !important;"></div>
+<% } %>

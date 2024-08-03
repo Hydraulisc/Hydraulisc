@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Messages | Hydraulisc</title>
+    <meta property="og:title" content="Hydraulisc">
+    <meta property="og:description" content="Why compromise security to send messages? Create an account on Hydraulisc to see more!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png">
+    <link rel="canonical" href="https://hydraulisc.net/auth" />
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together! Create an Account or Sign In to Continue!">
+    <meta property="og:site_name" content="Hydraulisc">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pmstyle.css">
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', { cookies: cookies }) %>
+    <%- include('../partials/header', { username: username }) %>
+    <%- include('../partials/pms_header', { username: username }) %>
+
+    <div style="margin-top: 1.9rem;">
+        <div id="workerResumer">
+            <div style="width: 100%; border: 2px solid #1d1f29; cursor: pointer;">
+                <div class="userimage_container">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/hydraulisc.appspot.com/o/saved_bookmarked.png?alt=media&token=116e8882-29a8-4f49-bbdb-2a00d0b114b2" alt="User Profile Picture" style="border: 1px solid white; border-radius: 50%; width: 46px; height: 46px; display: inline-block; vertical-align: middle;">
+                </div>
+                <div class="acc_username">
+                    <span>Saved Notes</span>
+                </div>
+            </div>
+        </div>
+        <!-- Believe it or not, there was once a time when there was other chats here. They were removed on purpose, to prevent any mishaps as PM's don't currently work correctly. -->
+    </div>
+
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+</html>

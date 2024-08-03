@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth | Hydraulisc</title>
+    <meta property="og:title" content="Login Page - Hydraulisc">
+    <meta property="og:description" content="Hydraulisc - Stay in the loop | Log in or Sign up to continue">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/144374735">
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together!">
+    <meta property="og:site_name" content="Hydraulisc - Stay in the loop">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <div id="warningbanner" style="width: 100%; height: 100%; position: absolute;top: 4.2rem;z-index: 10;background: rgba(0,0,0,0.5);left: 0;display: none;">
+        <div style="display: flex;background: black;max-width: 380px;margin: auto;">
+            <div style="padding: 1rem;font-weight: 600;color: red;">
+                <p id="thisiserrortext">$error.message.</p>
+                <p>HTTP ERROR 400.</p>
+            </div>
+        </div>
+    </div>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <div style="height: 100%; display: flex; color: #fff; align-items: center; flex-direction: column; justify-content: center; background-size: cover; background-position: center;">
+        <div style="padding: 48px 26px 24px; display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-top: 12px; max-width: 350px;">
+            <form id="login-form">
+                <div style="margin-top: 36px; overflow: visible; margin-bottom: 12px; align-content: stretch; border-bottom-left-radius: 0; flex-direction: column; box-sizing: border-box;display: flex; border-bottom-right-radius: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; flex-grow: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+                    <div style="cursor: pointer; display: flex; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png" style="width: 80%; height: auto; display: inline-block;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 10px; max-width: 350px; width: 100%;">
+                    <div style="border: 0; flex-direction: column; margin: 0; padding: 0;">
+                        <div style="overflow: visible; margin-top: 24px; align-content: stretch; flex-direction: column; display: flex; flex-shrink: 0; align-items: stretch; align-self: auto; position: relative; flex-grow: 0;">
+                            <div style="margin: 0 40px 6px;">
+                                <input type="email" name="email" placeholder="Email">
+                            </div>
+                            <div style="margin: 0 40px 6px;">
+                                <input type="password" name="password" placeholder="Password" autocomplete="off">
+                            </div>
+                            <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                                <button type="submit" name="thelogginginbutton" style="background: #5667c7 !important;">Sign In</button>
+                            </div>
+                            <div style="margin: 10px 40px 18px;">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div style="top: .45em; height: 1px; flex-shrink: 1; position: relative; flex-grow: 1; background-color: #d7d9e0;"></div>
+                                </div>
+                            </div>
+                            <div style="overflow: visible; margin-top: 8px; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0; text-align: center;">
+                                <p style="color: lightgray;">One account, for eveything Hydraulisc. <a href="https://about.hydraulisc.net/help/articles/101000/" style="text-decoration: none; color: #5667c7;">Learn More</a>.</p>
+                            </div>
+                            <div style="font-size: 12px; line-height: 16px; margin-top: 12px !important; text-align: center !important; display: inline; background-color: transparent; box-sizing: border-box; cursor: pointer; outline: none;">
+                                <span onclick="tryResetPassword()" style="color: #5667c7; font-size: 13px !important; background-color: transparent !important; text-transform: none !important; padding: 0 !important;">Forgot Password?</span>
+                            </div>
+                            <div style="overflow: visible; margin-top: 8px; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0; text-align: center;">
+                                <p style="font-size: smaller;">You can also <a href="https://about.hydraulisc.net/help/articles/101013" style="text-decoration: none; color: #5667c7;">report content, accounts</a>, and more without logging in.</p>
+                            </div>
+                            <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                                <button onclick="trySignup()" type="button">New?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form id="signup-form" style="display: none; height: 686px !important;">
+                <div style="margin-top: 36px;overflow: visible;margin-bottom: 12px;align-content: stretch;border-bottom-left-radius: 0;background-color: transparent;flex-direction: column;box-sizing: border-box;display: flex;border-bottom-right-radius: 0;align-items: stretch;align-self: auto;justify-content: flex-start;position: relative;flex-grow: 0;border-top-left-radius: 0;border-top-right-radius: 0;">
+                    <div style="cursor: pointer; display: flex; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png" style="width: 80%; height: auto; display: inline-block;">
+                    </div>
+                </div>
+                <div style="overflow: visible; margin-top: 24px; align-content: stretch; flex-direction: column; display: flex; flex-shrink: 0; align-items: stretch; align-self: auto; position: relative; flex-grow: 0;">
+                    <div style="margin: 0 40px 6px;">
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div style="margin: 0 40px 6px;">
+                        <input type="text" name="username" placeholder="Username" autocomplete="off">
+                    </div>
+                    <div style="margin: 0 40px 6px;">
+                        <input type="password" name="password" placeholder="Password" autocomplete="off">
+                    </div>
+                    <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                        <button type="submit" name="thelogginginbutton" style="background: #5667c7 !important;">Sign Up</button>
+                    </div>
+                    <div style="margin: 10px 40px 18px;">
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="top: .45em; height: 1px; flex-shrink: 1; position: relative; flex-grow: 1; background-color: #d7d9e0;"></div>
+                        </div>
+                    </div>
+                    <div style="overflow: visible; margin-top: 8px; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0; text-align: center;">
+                        <p style="font-size: small;">By continuing, you agree to our <a href="/terms" style="text-decoration: none; color: #5667c7;">Terms of Use</a>, and <a href="/policy" style="text-decoration: none; color: #5667c7;">Privacy Policy</a>.</p>
+                        <p style="font-size: small;">Additionally, by continuing use of our platform, you agree to our <a href="/guidelines" style="text-decoration: none; color: #5667c7;">Guidelines</a>.</p>
+                    </div>
+                    <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                        <button onclick="tryLogin()" type="button">Already have an account?</button>
+                    </div>
+                </div>
+            </form>
+            <form id="reset-password" style="display: none;  height: 686px !important; border: 1px solid #1c286b;">
+                <div style="margin-top: 36px;overflow: visible;margin-bottom: 12px;align-content: stretch;border-bottom-left-radius: 0;background-color: transparent;flex-direction: column;box-sizing: border-box;display: flex;border-bottom-right-radius: 0;align-items: stretch;align-self: auto;justify-content: flex-start;position: relative;flex-grow: 0;border-top-left-radius: 0;border-top-right-radius: 0;">
+                    <div style="cursor: pointer; display: flex; justify-content: center;">
+                        <img src="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png" style="width: 80%; height: auto; display: inline-block;">
+                    </div>
+                </div>
+                <div style="overflow: visible; margin-top: 24px; align-content: stretch; flex-direction: column; display: flex; flex-shrink: 0; align-items: stretch; align-self: auto; position: relative; flex-grow: 0;">
+                    <div style="margin: 0 40px 6px;">
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                        <button type="submit" name="thelogginginbutton" style="background: #5667c7 !important;">Reset Password</button>
+                    </div>
+                    <div style="margin: 10px 40px 18px;">
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="top: .45em; height: 1px; flex-shrink: 1; position: relative; flex-grow: 1; background-color: #d7d9e0;"></div>
+                        </div>
+                    </div>
+                    <div style="overflow: visible; margin-top: 8px; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0; text-align: center;">
+                        <p style="font-size: small;">By continuing, you agree to our <a href="/policy" style="text-decoration: none; color: #5667c7;">Privacy Policy</a>.</p>
+                        <p style="font-size: small;">Additionally, by continuing use of our platform, you agree to our <a href="/guidelines" style="text-decoration: none; color: #5667c7;">Guidelines</a> and <a href="/terms" style="text-decoration: none; color: #5667c7;">Terms of Use</a>.</p>
+                    </div>
+                    <div style="margin-top: 8px; overflow: visible; margin-bottom: 8px; align-content: stretch; flex-direction: column; box-sizing: border-box; display: flex; margin-left: 40px; flex-shrink: 0; align-items: stretch; align-self: auto; justify-content: flex-start; position: relative; margin-right: 40px; flex-grow: 0;">
+                        <button onclick="tryLogin()" type="button">Already have an account?</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+      <script>
+        const errortoplace = document.getElementById('thisiserrortext');
+        const warningbannerLog = document.getElementById('warningbanner');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const resetForm = document.getElementById('reset-password');
+
+        function trySignup() {
+            loginForm.style.display = "none";
+            signupForm.style.display = "block";
+            resetForm.style.display = "none";
+        }
+        function tryLogin() {
+            loginForm.style.display = "block";
+            signupForm.style.display = "none";
+            resetForm.style.display = "none";
+        }
+        function tryResetPassword() {
+            resetForm.style.display = "block";
+            loginForm.style.display = "none";
+            signupForm.style.display = "none";
+        }
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            loginForm.thelogginginbutton.disabled = true;
+            loginForm.thelogginginbutton.style.cursor = 'default';
+            loginForm.thelogginginbutton.style.background = '#000';
+            const email = loginForm.email.value;
+            const password = loginForm.password.value;
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+                .then(response => {
+                if (response.ok) {
+                    // User is authenticated
+                    window.location.href = '/';
+                } else {
+                    // Authentication failed
+                    response.text().then(errorMessage => {
+                        errortoplace.innerText = errorMessage;
+                        warningbannerLog.style.display = "block";
+                        console.error(errorMessage);
+                    });
+                }
+                })
+                .catch(error => {
+                    errortoplace.innerText = error;
+                    warningbannerLog.style.display = "block";
+                    console.error(error);
+                });
+        });
+
+        signupForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            signupForm.thelogginginbutton.disabled = true;
+            signupForm.thelogginginbutton.style.cursor = 'default';
+            loginForm.thelogginginbutton.style.background = '#000';
+            const email = signupForm.email.value;
+            const password = signupForm.password.value;
+            const username = signupForm.username.value
+
+            fetch('/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, username })
+            })
+                .then(response => {
+                if (response.ok) {
+                    // User is authenticated
+                    window.location.href = '/';
+                } else {
+                    // Authentication failed
+                    response.text().then(errorMessage => {
+                        errortoplace.innerText = errorMessage;
+                        warningbannerLog.style.display = "block";
+                        console.error(errorMessage);
+                    });
+                }
+                })
+                .catch(error => {
+                    errortoplace.innerText = error;
+                    warningbannerLog.style.display = "block";
+                    console.error(error);
+                });
+        });
+
+        resetForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            resetForm.thelogginginbutton.disabled = true;
+            resetForm.thelogginginbutton.style.cursor = 'default';
+            loginForm.thelogginginbutton.style.background = '#000';
+            const resetteremail = resetForm.email.value;
+
+            fetch('/auth/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ resetteremail, "yes": "Ok" })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // User is authenticated
+                    window.alert("Password Reset Email Sent Successfully");
+                } else {
+                    // Authentication failed
+                    response.text().then(errorMessage => {
+                        errortoplace.innerText = errorMessage;
+                        warningbannerLog.style.display = "block";
+                        console.error(errorMessage);
+                    });
+                }
+                })
+                .catch(error => {
+                    errortoplace.innerText = error;
+                    warningbannerLog.style.display = "block";
+                    console.error(error);
+                });
+        })
+
+      </script>
+</body>
+</html>

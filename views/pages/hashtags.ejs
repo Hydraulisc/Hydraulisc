@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydraulisc</title>
+    <meta property="og:title" content="Hydraulisc - Stay in the loop">
+    <meta property="og:description" content="#<%- hash %> on Hydraulisc - where communities come together!">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/144374735">
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together!">
+    <meta property="og:site_name" content="Hydraulisc - Stay in the loop">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/loveController.js"></script>
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <%- include('../partials/header', { username: username, uid: uid }) %>
+    <br>
+    <div class="app-container">
+        <div class="gridz">
+            <div class="home_container">
+                <h3 style="margin-left: 8px !important;">Latest Posts on #<%- hash %></h3>
+                <div class="container_container">
+                    <main class="landing_feat">
+                        <div>
+                            <% if (posts.length) { %>
+                                <% for (const post of posts) { %>
+                                    <div id="<%- post.path %>" class="star_post_container">
+                                        <div style="border-bottom: 1px solid #04050a;">
+                                            <span class="star_post_header_container">
+                                                <span class="star_post_header">
+                                                    <span style="position: relative;">
+                                                        <span style="display: flex;">
+                                                            <div>
+                                                                <div>
+                                                                    <a href="/user/<%- post.username %>" class="star_post_title">
+                                                                        <div style="padding-right: 6px;">
+                                                                            <img src="<%- post.userInformation.pfp %>" style="color: black; border-radius: 50%; overflow: hidden; justify-content: center; align-items: center; width: 40px; height: 40px; display: flex;" loading="lazy">
+                                                                        </div>
+                                                                        <span style="font-size: larger;"><%= post.userInformation.username %></span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                <% if (username && post.user === uid) { %>
+                                                    <span>
+                                                        <span style="position: absolute; right: 32px;">
+                                                            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#d7d9e0">
+                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                <g id="SVGRepo_iconCarrier"> <path d="M4.20999 20.5199C4.11375 20.521 4.01826 20.5029 3.92902 20.4669C3.83977 20.4308 3.75854 20.3775 3.68999 20.3099C3.61139 20.2323 3.55092 20.1383 3.51288 20.0346C3.47485 19.9308 3.4602 19.82 3.46999 19.7099L3.77999 15.8699C3.79328 15.6916 3.87156 15.5244 3.99999 15.3999L15.06 4.33995C15.6762 3.76286 16.4961 3.45361 17.34 3.47995C18.1784 3.48645 18.9828 3.81181 19.59 4.38995C20.1723 4.98795 20.5073 5.7839 20.5277 6.61837C20.5481 7.45284 20.2524 8.26421 19.7 8.88995L8.62999 19.9999C8.50609 20.1234 8.34386 20.201 8.16999 20.2199L4.27999 20.5699L4.20999 20.5199ZM5.20999 16.2599L4.99999 18.9999L7.73999 18.7499L18.64 7.82995C18.8525 7.57842 18.9884 7.27118 19.0314 6.94472C19.0745 6.61827 19.0229 6.28631 18.8828 5.9883C18.7428 5.69028 18.5201 5.43873 18.2413 5.26354C17.9625 5.08834 17.6393 4.99685 17.31 4.99995C17.0936 4.98621 16.8766 5.01633 16.6721 5.0885C16.4676 5.16067 16.2798 5.27341 16.12 5.41995L5.20999 16.2599Z" fill="#000000"/> </g>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                <% } else { %>
+                                                    <span></span>
+                                                <% } %>
+                                            </span>
+                                        </div>
+                                        <a style="inset: 0; text-decoration: none; color: white;" href="/post/<%- post.postId %>">
+                                            <div style="display: flex; margin-top: .3rem;">
+                                                <div style="overflow: hidden; margin-left: auto; margin-right: auto;">
+                                                    <img class="star_post_body" src="<%- post.imageUrl %>" loading="lazy" onclick="location.href='/post/<%- post.postId %>';">
+                                                    <div style="position: absolute; width: 100% !important; height: 400px !important; top: 0; left: 0;"></div>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; margin-top: .3rem; margin-bottom: .3rem;">
+                                                <div class="star_post_texter" style="overflow: hidden;">
+                                                    <%- post.content %>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="logged-out" style="position: relative; overflow: hidden;" id="fancy-icons">
+                                            <div style="float: left; display: block; text-align: center; padding: 14px; text-decoration: none; cursor: pointer;" onclick="location.href='/post/<%- post.loc %>';"><svg width="18px" height="18px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#d7d9e0"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><g id="Layer_2" data-name="Layer 2"><g id="invisible_box" data-name="invisible box"><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/></g><g id="icons_Q2" data-name="icons Q2"><path d="M43.9,15H34V8a2,2,0,0,0-2.1-2H4.1A2,2,0,0,0,2,8V36a1,1,0,0,0,1,1,1.3,1.3,0,0,0,.8-.3L13,28h1v7a2,2,0,0,0,2.1,2H35l9.2,8.7a1.3,1.3,0,0,0,.8.3,1,1,0,0,0,1-1V17A2,2,0,0,0,43.9,15ZM11.4,24l-1.1,1.1L6,29.1V10H30V24H11.4ZM42,38.1l-4.3-4L36.6,33H18V28H31.9A2,2,0,0,0,34,26V19h8Z"/></g></g></g></svg> Discussion</div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                <% } %>
+                            <% } else { %>
+                                <!-- No post data retrieved (API error) -->
+                                <h2>Error FETCHing /api/v2/hash/explore/$1</h2>
+                            <% } %>
+                        </div>
+                    </main>
+                    <div class="starboarder">
+                        <div class="recommend-starboard">
+                            <section class="starboard12">
+                                <div class="starboard13">
+                                    <div class="starboard14">
+                                        <b>Suggested</b>
+                                        <% for (const tag of recoHash) { %>
+                                            <div style="width: 100%; cursor: pointer; margin-top: 1rem;">
+                                                <div style="border: 1px solid #d7d9e0; border-radius: 4px; display: inline-flex; width: 100%;" onclick="location.href='<%- tag %>'">
+                                                    <p style="font-size: smaller; display: inline-block; margin-left: 1rem;">#<%- tag %></p>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="mobileStarboarder">
+                    <div class="mobileReccomend">
+                        <section class="starboard12">
+                            <div class="starboard13">
+                                <div class="starboard14">
+                                    <b style="font-size: larger !important;">Suggested Accounts</b>
+                                    <% for (const post of posts) { %>
+                                        <div style="width: 100%; cursor: pointer; margin-top: 1rem;">
+                                            <div style="border: 1px solid #d7d9e0; border-radius: 4px; display: inline-flex; width: 100%;" onclick="location.href='/user/<%- post.id %>';">
+                                                <img src="<%- post.pfp %>" style="width: 28px; height: 28px; border-radius: 50%; margin-left: 12px; margin-top: auto; margin-bottom: auto; display: inline-block;" loading="lazy">
+                                                <p style="font-size: small; display: inline-block; margin-left: 1rem;"><%- post.username %></p>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div> -->
+                <h3 style="margin-left: 8px !important;">More Posts</h3>
+                <div class="container_container" style="margin-bottom: 4rem !important;">
+                    <div id="furtherReading" class="landing_feat"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+        <!-- <script>
+            window.onload = function(){
+                const theOldArray = JSON.parse(' JSON.stringify(alreadyRenderedArray) ');
+                setTimeout(() => fetchRemainingPosts(theOldArray), 310);
+            }
+        </script>
+        <script>
+            // Function to make the HTTP POST request to /api/v1/science/home
+    async function fetchRemainingPosts(alreadyRenderedArray) {
+    const response = await fetch(`/api/v2/science/home`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({alreadyRenderedArray})
+    });
+
+    if (response.ok) {
+        const remainingPosts = await response.json();
+        // Handle the remaining posts, append to existing posts on the frontend
+        remainingPosts.forEach(post => {
+        const div = document.createElement('div');
+                div.innerHTML = `
+        <div id="${post.loc}" class="star_post_container">
+            <div style="border-bottom: 1px solid #04050a;">
+                <span class="star_post_header_container">
+                    <span class="star_post_header">
+                        <span style="position: relative;">
+                            <span style="display: flex;">
+                                <div>
+                                    <div>
+                                        <a href="/user/${post.poster}" class="star_post_title">
+                                            <div style="padding-right: 6px;">
+                                                <img src="${post.pfp}" style="color: black; border-radius: 50%; overflow: hidden; justify-content: center; align-items: center; width: 40px; height: 40px; display: flex;" loading="lazy">
+                                            </div>
+                                            <span style="font-size: larger;">${post.username}</span>
+                                            <div style="position: relative;left: 39rem; display: none !important;">
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#d7d9e0" width="18px" height="18px">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path d="M4.20999 20.5199C4.11375 20.521 4.01826 20.5029 3.92902 20.4669C3.83977 20.4308 3.75854 20.3775 3.68999 20.3099C3.61139 20.2323 3.55092 20.1383 3.51288 20.0346C3.47485 19.9308 3.4602 19.82 3.46999 19.7099L3.77999 15.8699C3.79328 15.6916 3.87156 15.5244 3.99999 15.3999L15.06 4.33995C15.6762 3.76286 16.4961 3.45361 17.34 3.47995C18.1784 3.48645 18.9828 3.81181 19.59 4.38995C20.1723 4.98795 20.5073 5.7839 20.5277 6.61837C20.5481 7.45284 20.2524 8.26421 19.7 8.88995L8.62999 19.9999C8.50609 20.1234 8.34386 20.201 8.16999 20.2199L4.27999 20.5699L4.20999 20.5199ZM5.20999 16.2599L4.99999 18.9999L7.73999 18.7499L18.64 7.82995C18.8525 7.57842 18.9884 7.27118 19.0314 6.94472C19.0745 6.61827 19.0229 6.28631 18.8828 5.9883C18.7428 5.69028 18.5201 5.43873 18.2413 5.26354C17.9625 5.08834 17.6393 4.99685 17.31 4.99995C17.0936 4.98621 16.8766 5.01633 16.6721 5.0885C16.4676 5.16067 16.2798 5.27341 16.12 5.41995L5.20999 16.2599Z" fill="#000000"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <a style="inset: 0; position: absolute;  text-decoration: none; color: white;" href="/user/${post.poster}"></a>
+            <div style="display: flex; margin-top: .3rem;">
+                <div style="overflow: hidden; margin-left: auto; margin-right: auto;">
+                    <img class="star_post_body" src="${post.imageUrl}" loading="lazy">
+                </div>
+            </div>
+            <div style="display: flex; margin-top: .3rem; margin-bottom: .3rem;">
+                <div style="overflow: hidden;">
+                    <p>${post.content}</p>
+                </div>
+            </div>
+            <div class="<%- username ? 'logged-in' : 'logged-out' %>" style="position: relative; overflow: hidden;" id="fancy-icons">
+                <div id="love-count-${post.loc}" style="float: left; display: block; text-align: center; padding: 14px; text-decoration: none; cursor: pointer;" onclick="lovePost('${post.loc}')"><svg width="18px" height="18px" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M8.96173 18.9109L9.42605 18.3219L8.96173 18.9109ZM12 5.50063L11.4596 6.02073C11.601 6.16763 11.7961 6.25063 12 6.25063C12.2039 6.25063 12.399 6.16763 12.5404 6.02073L12 5.50063ZM15.0383 18.9109L15.5026 19.4999L15.0383 18.9109ZM9.42605 18.3219C7.91039 17.1271 6.25307 15.9603 4.93829 14.4798C3.64922 13.0282 2.75 11.3345 2.75 9.1371H1.25C1.25 11.8026 2.3605 13.8361 3.81672 15.4758C5.24723 17.0866 7.07077 18.3752 8.49742 19.4999L9.42605 18.3219ZM2.75 9.1371C2.75 6.98623 3.96537 5.18252 5.62436 4.42419C7.23607 3.68748 9.40166 3.88258 11.4596 6.02073L12.5404 4.98053C10.0985 2.44352 7.26409 2.02539 5.00076 3.05996C2.78471 4.07292 1.25 6.42503 1.25 9.1371H2.75ZM8.49742 19.4999C9.00965 19.9037 9.55954 20.3343 10.1168 20.6599C10.6739 20.9854 11.3096 21.25 12 21.25V19.75C11.6904 19.75 11.3261 19.6293 10.8736 19.3648C10.4213 19.1005 9.95208 18.7366 9.42605 18.3219L8.49742 19.4999ZM15.5026 19.4999C16.9292 18.3752 18.7528 17.0866 20.1833 15.4758C21.6395 13.8361 22.75 11.8026 22.75 9.1371H21.25C21.25 11.3345 20.3508 13.0282 19.0617 14.4798C17.7469 15.9603 16.0896 17.1271 14.574 18.3219L15.5026 19.4999ZM22.75 9.1371C22.75 6.42503 21.2153 4.07292 18.9992 3.05996C16.7359 2.02539 13.9015 2.44352 11.4596 4.98053L12.5404 6.02073C14.5983 3.88258 16.7639 3.68748 18.3756 4.42419C20.0346 5.18252 21.25 6.98623 21.25 9.1371H22.75ZM14.574 18.3219C14.0479 18.7366 13.5787 19.1005 13.1264 19.3648C12.6739 19.6293 12.3096 19.75 12 19.75V21.25C12.6904 21.25 13.3261 20.9854 13.8832 20.6599C14.4405 20.3343 14.9903 19.9037 15.5026 19.4999L14.574 18.3219Z" fill="#d7d9e0"/></g></svg>  ${post.likeCount} Love</div>
+                <div style="float: left; display: block; text-align: center; padding: 14px; text-decoration: none; cursor: pointer;" onclick="location.href='/post/${post.loc}';"><svg width="18px" height="18px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#d7d9e0"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><g id="Layer_2" data-name="Layer 2"><g id="invisible_box" data-name="invisible box"><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/></g><g id="icons_Q2" data-name="icons Q2"><path d="M43.9,15H34V8a2,2,0,0,0-2.1-2H4.1A2,2,0,0,0,2,8V36a1,1,0,0,0,1,1,1.3,1.3,0,0,0,.8-.3L13,28h1v7a2,2,0,0,0,2.1,2H35l9.2,8.7a1.3,1.3,0,0,0,.8.3,1,1,0,0,0,1-1V17A2,2,0,0,0,43.9,15ZM11.4,24l-1.1,1.1L6,29.1V10H30V24H11.4ZM42,38.1l-4.3-4L36.6,33H18V28H31.9A2,2,0,0,0,34,26V19h8Z"/></g></g></g></svg> Discussion</div>
+            </div>
+        </div>
+        <br>
+            `;
+        document.getElementById("furtherReading").appendChild(div);
+        });
+    } else {
+        console.log("API Error: /api/v2/science/home - Expected array yet received null exception.")
+    }
+    }
+        </script> -->
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+</html>

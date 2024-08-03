@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(userpage) { %>
+        <title>Hydraulisc</title>
+        <meta property="og:title" content="Hydraulisc - Stay in the loop">
+        <meta property="og:image" content="<%= embed %>">
+        <% if (follows == null || follows == undefined || follows == 0) { %>
+            <meta property="og:description" content="Be the first to follow <%= userpage %> on Hydraulisc">
+        <% } else { %>
+            <meta property="og:description" content="<%= userpage %> has <%= follows %> Followers | Hydraulisc">
+        <% } %>
+    <% } else { %>
+        <title>Not Found | Hydraulisc</title>
+        <meta property="og:title" content="Hydraulisc - Stay in the loop">
+        <meta property="og:description" content="Create an account on Hydraulisc to see more!">
+        <meta property="og:image" content="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png">
+        <link rel="canonical" href="https://hydraulisc.net/404">
+    <% } %>
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together!">
+    <meta property="og:site_name" content="Hydraulisc">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/userController.js"></script>
+    <link rel="stylesheet" href="/css/settins.css">
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <%- include('../partials/header', { username: username }) %>
+
+    <div style="margin: 0 0 62px;">
+        <div class="profileBody">
+            <div style="display: block;">
+                <div style="padding-top: 60px; padding-bottom: 0; padding-right: 0; padding-left: 0; margin-top: 0; margin-bottom: 24px; margin-right: 0; margin-left: 0;">
+                    <div class="userInfoSet">
+                        <% if (banner) { %>
+                            <div class="bannerWrapper" style="background-color: #1C286B;">
+                                <div class="bannerContainer" style="background-image: url('<%- banner %>');"></div>
+                                <div class="bannerDivider"></div>
+                                <div class="usernameContainer">
+                                    <span style="display: block; margin: 0; line-height: 32px; font-size: 1.8em; font-weight: 700; position: relative; bottom: -8px;"><%- userpage %></span>
+                                    <% if (discriminator) { %>
+                                        <span style="font-size: 15px; position: relative; bottom: -8px; right: 0px;">@<%- userpage %>#<%- discriminator %></span>
+                                    <% } else { %>
+                                        <span style="font-size: 15px; position: relative; bottom: -8px; right: 0px;">@<%- userpage %>#<%- discriminator %></span>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <div class="bannerWrapper" style="background-color: #1C286B;">
+                                <div class="bannerContainer">
+                                    <div class="settingsBanner"></div>
+                                </div>
+                                <div class="bannerDivider"></div>
+                                <div class="usernameContainer">
+                                    <span style="display: block; margin: 0; line-height: 32px; font-size: 1.8em; font-weight: 700; position: relative; bottom: -8px;"><%- userpage %></span>
+                                    <% if (discriminator) { %>
+                                        <span style="font-size: 15px; position: relative; bottom: -7px; right: 0px;">@<%- userpage %>#<%- discriminator %></span>
+                                    <% } else { %>
+                                        <span style="font-size: 15px; position: relative; bottom: -7px; right: 0px;" title="You don't have a discriminator (yet)">@<%- userpage %>#0000</span>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                        
+                        <div class="usernameSettings">
+                            <% if (discriminator) { %>
+                                <div class="avatarStack" title="@<%- userpage %>#<%- discriminator %>'s Profile Image">
+                                    <div class="avatarMask">
+                                        <div class="avatara">
+                                            <div class="avatarb">
+                                                <img src="<%- embed %>" alt=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } else { %>
+                                <div class="avatarStack" title="@<%- userpage %>#0000's Profile Image">
+                                    <div class="avatarMask">
+                                        <div class="avatara">
+                                            <div class="avatarb">
+                                                <img src="<%- embed %>" alt=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                            <div style="box-sizing: border-box; outline: 0; margin: 0; padding: 0; border: 0;">
+                                <div class="profileUsernameContainer">
+                                    <div class="userTag">
+                                        <% if (discriminator) { %>
+                                            <span><%- userpage %></span>
+                                            <span style="font-weight: 400 !important; font-size: 13px !important;">@<%- userpage %>#<%- discriminator %></span>
+                                        <% } else { %>
+                                            <span title="You don't have a Discriminator (yet)"><%- userpage %></span>
+                                            <span style="font-weight: 400 !important; font-size: 13px !important;">@<%- userpage %>#0000</span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <p style="display: none;">Badges</p>
+                                <div class="badgeList" style="display: none !important;"></div>
+                                
+                            </div>
+                        </div>
+                        <div class="descriptions">
+                            <% if (follows == null || follows == undefined) { %>
+                                <span style="color: #454857; cursor: default;">0 Followers</span>
+                            <% } else { %>
+                                <span style="color: #454857; cursor: default;"><%= follows %> Followers</span>
+                            <% } %>
+                            <% if (username && !followingList.includes(userIdToCheck)) { %>
+                                <!-- User is logged in and not following -->
+                                <button class="join_star_button" onclick="followUser('<%= userIdToCheck %>')">Follow</button>
+                                <% if(uid == userIdToCheck) { %>
+                                    <button class="join_star_button" onclick="location.href='/settings';" style="width: auto !important;">Edit Profile</button>
+                                <% } else { %>
+                                    <span></span>
+                                <% } %>
+                            <% } else if(username && followingList.includes(userIdToCheck)) { %>
+                                <!-- User is logged in and already following -->
+                                <button class="join_star_button" onclick="unfollowUser('<%= userIdToCheck %>')">Unfollow</button>
+                                <% if(uid == userIdToCheck) { %>
+                                    <button class="join_star_button" onclick="location.href='/settings';" style="width: auto !important;">Edit Profile</button>
+                                <% } else { %>
+                                    <span></span>
+                                <% } %>
+                            <% } else { %>
+                                <!-- User is not logged in -->
+                                <span style="cursor: pointer; text-decoration: none;" onclick="location.href='/auth?utm_src=<%= userpage %>&utm_source=<%= userpage %>&v2=false';">Sign in to see more!</span>
+                            <% } %>
+                            <div>
+                                <% if (usersBiography) { %>
+                                    <p><%- usersBiography %></p>
+                                <% } else { %>
+                                    <p><i>This user has not written their Bio yet.</i></p>
+                                <% } %>
+                            </div>
+                            <div class="navigation">
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 44px; grid-column-gap: 0px; grid-row-gap: 0px; width: 100%; min-width: 100%;">
+                                    <div style="display: flex; height: 100%; width: 100%; max-width: 100%; margin: auto;">
+                                        <button style="background: transparent; border: none; height: 100%; width: 100%; color: #d7d9e0; font-weight: 600; cursor: pointer;">Posts</button>
+                                    </div>
+                                    <div style="display: flex; height: 100%; width: 100%; max-width: 100%; margin: auto;">
+                                        <button style="background: transparent; border: none; height: 100%; width: 100%; color: #d7d9e0; font-weight: 600; cursor: pointer;">Comments</button>
+                                    </div>
+                                    <div style="display: flex; height: 100%; width: 100%; max-width: 100%; margin: auto;">
+                                        <button style="background: transparent; border: none; height: 100%; width: 100%; color: #d7d9e0; font-weight: 600; cursor: pointer;">About</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div style="margin-top: 1rem; margin-bottom: 1rem; margin-left: auto; margin-right: auto; width: 100%;">
+                                <div style="display: flex; width: fit-content; max-width: 100%; margin: auto;">
+                                    <button style="background: #1d1f29; border: 2px solid #1c286b; color: #d7d9e0; border-radius: 6px; font-weight: 600; padding: .5rem; margin-left: 1rem; margin-right: 1rem;">Posts</button>
+                                    <button style="background: #1d1f29; border: 2px solid #1c286b; color: #d7d9e0; border-radius: 6px; font-weight: 600; padding: .5rem; margin-left: 1rem; margin-right: 1rem;">Comments</button>
+                                    <button style="background: #1d1f29; border: 2px solid #1c286b; color: #d7d9e0; border-radius: 6px; font-weight: 600; padding: .5rem; margin-left: 1rem; margin-right: 1rem;">About</button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="userpage-container">
+        <% if (starboards.length) { %>
+            <div class="profileGrid">
+                <% for (const starboard of starboards) { %>
+                    <div id="<%- starboard.link %>" onclick="location.href='/post/<%- starboard.link %>';">
+                        <div class="slot">
+                            <div style="overflow: hidden; height: 240px;">
+                                <img class="cover-img" src="<%- starboard.cover %>">
+                                <div style="width: 100%; height: 100%; position: relative; top: -246px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <% } else { %>
+                <span style="display: block; margin: 0; line-height: 32px; font-size: 1.8em; font-weight: 700; position: relative; bottom: -8px;"><%= userpage %> hasn't uploaded anything... yet!</span>
+            <% } %>
+    </div>
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+</html>

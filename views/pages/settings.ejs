@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Hydraulisc</title>
+    <meta property="og:title" content="Hydraulisc">
+    <meta property="og:description" content="Create an account on Hydraulisc to see more!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/Hydraulisc/hydraulisc.github.io/main/assets/img/Hydraulisc.png">
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together! Create an Account or Sign In to Continue!">
+    <meta property="og:site_name" content="Hydraulisc">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/settins.css">
+    <link rel="stylesheet" href="/css/setting.css">
+    <script src="/js/settingsDOMcontroller.js" defer></script>
+    <script src="/js/settingsController.js" defer></script>
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <%- include('../partials/header', { username: username }) %>
+    <div id="hydrauliscselapp">
+        <div class="damagepackage">
+            <div class="setting-contents">
+                <div class="dpkg-setting-contents">
+                    <main id="maincontent" style="min-width: 0px;">
+                        <div class="sticky-container" tabindex="-1">
+                            <div class="sticky-contdiv">
+                                <div class="forbiddenbkb">
+                                    <div class="forbiddencontent">
+                                        <div>
+                                            <div class="forbiddenwide">
+                                                <div class="settingsrednav">
+                                                    <div>
+                                                        <nav class="settingsnav">
+                                                            <section class="group">
+                                                                <div class="setnav-title">User Settings</div>
+                                                                <div>
+                                                                    <a onclick="profileSettings()" class="nav_button">
+                                                                        <span class="text">Profile</span>
+                                                                    </a>
+                                                                    <a onclick="privacySettings()" class="nav_button">
+                                                                        <span class="text">Privacy</span>
+                                                                    </a>
+                                                                    <a onclick="notifSettings()" class="nav_button">
+                                                                        <span class="text">Notifications</span>
+                                                                    </a>
+                                                                    <a onclick="mailNotifications()" class="nav_button">
+                                                                        <span class="text">Email</span>
+                                                                    </a>
+                                                                    <a onclick="securitySettings()" class="nav_button">
+                                                                        <span class="text">Security</span>
+                                                                    </a>
+                                                                </div>
+                                                            </section>
+                                                            <section class="group">
+                                                                <div class="setnav-title">Client Settings</div>
+                                                                <div>
+                                                                    <a onclick="generalClient()" class="nav_button">
+                                                                        <span class="text">General</span>
+                                                                    </a>
+                                                                    <a onclick="themeFunction()" class="nav_button">
+                                                                        <span class="text">Theme</span>
+                                                                    </a>
+                                                                    <a onclick="pluginsList()" class="nav_button">
+                                                                        <span class="text">Plugins</span>
+                                                                    </a>
+                                                                </div>
+                                                            </section>
+                                                            <section class="group">
+                                                                <div class="setnav-title">Other Settings</div>
+                                                                <div>
+                                                                    <a onclick="mute_or_unmute()" class="nav_button">
+                                                                        <span class="text">Mutes and Blocks</span>
+                                                                    </a>
+                                                                    <a onclick="apiSetting()" class="nav_button">
+                                                                        <span class="text">API</span>
+                                                                    </a>
+                                                                    <a onclick="payloadUrl()" class="nav_button">
+                                                                        <span class="text">Webhook</span>
+                                                                    </a>
+                                                                    <a onclick="additionalSettings()" class="nav_button">
+                                                                        <span class="text">Other</span>
+                                                                    </a>
+                                                                </div>
+                                                            </section>
+                                                            <section class="group">
+                                                                <div>
+                                                                    <button onclick="handleLogout()" class="danger" style="border: none; border-radius: 6px; padding: .65rem; cursor: pointer; width: 100%; margin-top: .35rem;">
+                                                                        <span class="text">Sign Out</span>
+                                                                    </button>
+                                                                </div>
+                                                            </section>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <section class="mainsettab">
+                                                    <div id="profiletabulatordisplay" style="display: block;" class="tobesetnone">
+                                                        <div class="_formRoot" tabindex="-1">
+                                                            <br>
+                                                            <div class="lluviere" style="background-image: url('<%- banner %>');">
+                                                                <div class="avatar">
+                                                                    <span class="squircle-avatar" style="color: #1C286B;" title="Avatar">
+                                                                        <img class="inner" src="<%- pfp %>" loading="lazy">
+                                                                    </span>
+                                                                    <button id="avatarEdit" onclick="changepfpmodal()">
+                                                                        <div>Change avatar</div>
+                                                                    </button>
+                                                                </div>
+                                                                <button id="bannerEdit" onclick="changebannermodal()">
+                                                                    <div>Change banner</div>
+                                                                </button>
+                                                            </div>
+                                                            <div class="nameForm">
+                                                                <label>
+                                                                    <div class="label">Display Name</div>
+                                                                    <div class="input">
+                                                                        <input spellcheck="false" value="<%- username %>" style="border-color: rgb(19, 19, 19); cursor: not-allowed !important;" disabled max="30" maxlength="30">
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="biographyForm">
+                                                                <label>
+                                                                    <span class="label">Bio</span>
+                                                                    <div class="input">
+                                                                        <% if (userBiography) { %>
+                                                                            <textarea id="thisistheuserbioid" spellcheck="false" style="border-color: rgb(19, 19, 19); border-radius: 8px 8px 0 8px;" maxlength="500" max="500" value="<%- userBiography %>"><%- userBiography %></textarea>
+                                                                        <% } else { %>
+                                                                            <textarea id="thisistheuserbioid" spellcheck="false" style="border-color: rgb(19, 19, 19); border-radius: 8px 8px 0 8px;" maxlength="500" max="500"></textarea>
+                                                                        <% } %>
+                                                                    </div>
+                                                                    <div class="caption">You can also include hash's in your bio.</div>
+                                                                </label>
+                                                                <button onclick="saveSayonara()" class="button_save">
+                                                                    <div> Save</div>
+                                                                </button>
+                                                            </div>
+                                                            <div class="matxzzsk _formBlock" style="--a8ff023a: 38px;">
+                                                                <label>
+                                                                    <div class="label">Birthday (Optional!)</div>
+                                                                    <div class="input">
+                                                                        <input type="date" disabled style="border-color: rgb(19, 19, 19);">
+                                                                    </div>
+                                                                    <div class="caption">Birthday's aren't (currently) used for anything. We might add a <span style="font-family: monospace; color: white; background: black;">{{event.birthday}}</span> in the future.</div>
+                                                                </label>
+                                                                <!--
+                                                                <button onclick="saveSayonara()" class="button_save">
+                                                                    <div> Save</div>
+                                                                </button>
+                                                                -->
+                                                            </div><br><br>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox" disabled>
+                                                                <span class="label">
+                                                                    <span>Mark this account as automated</span>
+                                                                    <p class="caption"><b>WARNING! EXPERIMENTAL!</b> Enable this option if this account is controlled by a program. If enabled, it will act as a flag for other developers to prevent endless interaction chains with other automated accounts and adjust Hydraulisc's internal systems to treat this account as an automated account.</p>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div id="privacytabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox">
+                                                                <span class="label">
+                                                                    <span>Follow requests require approval</span>
+                                                                    <p class="caption">Unless you set your profile visiblity to "Followers only", your posts will be visible to anyone, even if you require followers to be manually approved.</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox" checked>
+                                                                <span class="label">
+                                                                    <span>Set comments history to public </span>
+                                                                    <p class="caption">This will make the list of all your past comments publicly visible.</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox">
+                                                                <span class="label">
+                                                                    <span>Allow Private Messages from Unknown Users</span>
+                                                                    <p class="caption">If this is unchecked, you can only PM someone who you mutually follow, even if you don't require followers to be manually approved.</p>
+                                                                </span>
+                                                            </label>
+                                                            <div class="vblkjoeq _formBlock" style="--59f2add9: 36px;">
+                                                                <div class="label">Profile Visibility</div>
+                                                                <div class="input">
+                                                                    <div class="prefix"></div>
+                                                                    <select class="select" style="border-color: rgb(35, 35, 47); padding-right: 34px;">
+                                                                        <option value="public">Public</option>
+                                                                        <option value="followers">Visible to followers only</option>
+                                                                        <!-- <option value="private">Private</option> -->
+                                                                    </select>
+                                                                    <p class="caption" style="font-size: smaller !important;">Allows you to configure who can see your profile.</p>
+                                                                </div>
+                                                            </div>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox" disabled>
+                                                                <span class="label">
+                                                                    <span>Indexable </span>
+                                                                    <p class="caption">Allow built-in search to show your public posts</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox" disabled>
+                                                                <span class="label">
+                                                                    <span>Reject crawler indexing </span>
+                                                                    <p class="caption">Ask external search engines to not index your content.</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt">
+                                                                <input type="checkbox" checked disabled>
+                                                                <span class="label">
+                                                                    <span>Prevent AI bot scraping <sup title="This is a very Beta feature!" style="text-decoration: underline;">Beta</sup></span>
+                                                                    <p class="caption">Request third-party AI language models not to study content you upload, such as posts and images.</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox">
+                                                                <span class="label">
+                                                                    <span>Disable "Recommendations" </span>
+                                                                    <p class="caption">If you turn this off, you will not receive random recommendations, but your account will not show up in the "Recommendations" sections either.</p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox" checked disabled>
+                                                                <span class="label">
+                                                                    <span>Keep content warnings</span>
+                                                                    <p class="caption">This will remind you to accept cookies more often and <b>push more content warnings!</b></p>
+                                                                </span>
+                                                            </label>
+                                                            <label class="ziffeomt _formBlock">
+                                                                <input type="checkbox">
+                                                                <span class="label">
+                                                                    <span>Add "re:" at the beginning of comments and replies.</span>
+                                                                    <p class="caption"></p>
+                                                                </span>
+                                                            </label>
+                                                            <button class="button_save">
+                                                                <div> Save</div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div id="notificationstabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <h3>Notifications aren't currently configured on this client!</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div id="emailtabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div>
+                                                            <div class="_formRoot">
+                                                                <section class="_formBlock" style="border-bottom: .5px solid rgb(35, 35, 47);">
+                                                                    <h3 class="label">Email</h3>
+                                                                    <div class="_formRoot">
+                                                                        <div>
+                                                                            <label>
+                                                                                <div class="input" style="position: relative;">
+                                                                                    <input type="email" value="support@hydraulisc.net" disabled style="cursor: not-allowed;">
+                                                                                    <div class="suffix">Use the support email above to request a change to your email. A verification code will appear here for 7 days after we process your request to ensure it's you requesting the change.</div>
+                                                                                </div>
+                                                                                <p style="background: black; color: white; font-family: monospace;">{{email.verified}}</p>
+                                                                                <button class="button_save" style="display: none !important;">
+                                                                                    <div> Save</div>
+                                                                                </button>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </section>
+                                                                <section class="_formBlock" style="border-bottom: .5px solid rgb(35, 35, 47);">
+                                                                    <h3 class="label"></h3>
+                                                                    <div class="_formRoot">
+                                                                        <label>
+                                                                            <input type="checkbox" checked disabled>
+                                                                            <span class="label">
+                                                                                <span style="background: black; color: white; font-family: monospace;">{{event.notificationreceive}}</span>
+                                                                                <p class="caption">Notifications aren't currently supported on this client!</p>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </section>
+                                                                <section class="_formBlock">
+                                                                    <h3 class="label">Email Notifications</h3>
+                                                                    <div class="_formRoot">
+                                                                        <label>
+                                                                            <span class="label">
+                                                                                <p class="caption">We only send important security emails, such as Password Reset Requests or Password/Email Changes.</p>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="securitytabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot" style="outline: none;">
+                                                            <section class="_formBlock" style="padding-bottom: 1rem; border-bottom: .5px solid rgb(35, 35, 47);">
+                                                                <h3 class="label">Password</h3>
+                                                                <div class="_formRoot">
+                                                                    <button class="danger" style="border: none; padding: .65rem; cursor: pointer; border-radius: 8px; color: #d7d9e0 !important;">
+                                                                        <div> Change Password</div>
+                                                                    </button>
+                                                                </div>
+                                                            </section>
+                                                            <section class="_formBlock" style="border-bottom: .5px solid rgb(35, 35, 47); padding-bottom: 1rem;">
+                                                                <h3 class="label">MFA</h3>
+                                                                <div class="_formRoot">
+                                                                    <label>
+                                                                        <button style="background: crimson; font-weight: 700; border: none; padding: .65rem; cursor: not-allowed; border-radius: 8px; color: #d7d9e0 !important;" disabled>
+                                                                            <div> Add Authenticator</div>
+                                                                        </button>
+                                                                        <button style="background: crimson; font-weight: 700; border: none; padding: .65rem; cursor: not-allowed; border-radius: 8px; color: #d7d9e0 !important;" disabled>
+                                                                            <div> Register Pass Key</div>
+                                                                        </button>
+                                                                        <span class="label">
+                                                                            <p class="caption">MFA is not currently supported. Please come back later.</p>
+                                                                            <!--<p class="caption">Add an extra layer of security by enabling 2FA on your account.</p>-->
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </section>
+                                                            <section class="_formBlock" style="display: none !important;">
+                                                                <h3 class="label">Sign In History</h3>
+                                                                <!-- Neither the API nor the backend is ready for this. Please come back later :-) -->
+                                                            </section>
+                                                            <secion class="_formBlock">
+                                                                <h3 class="label"></h3>
+                                                                <div class="_formRoot">
+                                                                    <label>
+                                                                        <button onclick="manualRefreshTokens()" class="danger" style="border: none; padding: .65rem; cursor: pointer; border-radius: 8px; color: #d7d9e0 !important;">
+                                                                            <div> Regenerate Account Tokens</div>
+                                                                        </button>
+                                                                        <span class="label">
+                                                                            <p class="caption">Regenerates all tokens used internally during sign in. Normally this action is not necessary. If regenerated, all devices will be logged out.</p>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                            </secion>
+                                                        </div>
+                                                    </div>
+                                                    <div id="generaltabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot" style="outline: none;">
+                                                            <div class="_formBlock">
+                                                                <div class="label">Interface Language</div>
+                                                                <div class="input">
+                                                                    <select class="select" style="border-color: rgb(35, 35, 47); padding-right: 34px;">
+                                                                        <option value="en-EN">English</option>
+                                                                        <option value="es-ES">Español</option>
+                                                                        <option value="ca-ES">Català</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="caption">
+                                                                    <span class="label">
+                                                                        <p class="caption">Hydraulisc is undergoing some major modifications. Translations are a very WIP feature, and do not currently save. Please be patient, weblate translations coming soon! <span style="display: none !important;">You can help translate at <a href="">Weblate</a></span></p>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <fieldset class="_formBlock" style="padding-bottom: 1rem; border-bottom: .5px solid rgb(35, 35, 47);">
+                                                                <legend class="caption">Icon Set</legend>
+                                                                <div>
+                                                                    <label style="border-color: rgba(255, 89, 117, 0.15);">
+                                                                        <input type="radio" checked>
+                                                                        <span class="button">
+                                                                            <span></span>
+                                                                        </span>
+                                                                        <span class="label">Default</span>
+                                                                    </label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    <div id="themestabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <section class="main">
+                                                            <div>
+                                                                <div class="_formRoot">
+                                                                    <div class="_formBlock" style="background-color: #12131a !important; border-radius: 8px !important;">
+                                                                        <div style="position: relative; padding: 27px 0; text-align: center;">
+                                                                            <div style="display: inline-block; text-align: left; padding: 0 100px; vertical-align: bottom;">
+                                                                                <div class="toggle-theme-container">
+                                                                                    <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                        <g id="SVGRepo_iconCarrier">
+                                                                                            <path d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                        </g>
+                                                                                    </svg>
+                                                                                    <label class="toggle-theme" onclick="toggleTheme()">
+                                                                                        <div class="slider"></div>
+                                                                                    </label>
+                                                                                    <svg width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                                        <g id="SVGRepo_iconCarrier">
+                                                                                            <path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="#fff001" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                        </g>
+                                                                                    </svg>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="label">
+                                                                            <div class="caption" style="padding: 2px 12px;">Themes are synced across clients by default. They are very Work In Progress.</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="_formBlock" style="display: flex; gap: 1.5em; flex-wrap: wrap;">
+                                                                        <div class="thememanagers">
+                                                                            <div class="label" style="padding: 8px 0 !important;">Theme to use Light Mode</div>
+                                                                            <div class="input">
+                                                                                <select class="select" style="border-color: rgb(35, 35, 47); padding-left: 37px; padding-right: 37px;">
+                                                                                    <optgroup label="default themes">
+                                                                                        <option value="404aa4da-46f7-4cd2-88b2-09e9298c4464">Draulisc Blinding Theme</option>
+                                                                                    </optgroup>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="thememanagers">
+                                                                            <div class="label" style="padding: 8px 0 !important;">Theme to use in Dark Mode</div>
+                                                                            <div class="input">
+                                                                                <select class="select" style="border-color: rgb(35, 35, 47); padding-left: 37px; padding-right: 37px;">
+                                                                                    <optgroup label="default themes">
+                                                                                        <option value="50f7b660-6fe0-41f3-bf4f-cb85a4ba5c64">Draulisc Default Dark Theme</option>
+                                                                                    </optgroup>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <section class="_formBlock">
+                                                                            <label>
+                                                                                <span class="label">Custom CSS <sup style="font-weight: 600;"><i>BETA</i></sup></span>
+                                                                                <div class="input">
+                                                                                    <textarea spellcheck="false" style="border-color: rgb(19, 19, 19); border-radius: 8px 8px 0 8px;"></textarea>
+                                                                                </div>
+                                                                            </label>
+                                                                            <button class="button_save">
+                                                                                <div> Save</div>
+                                                                            </button>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div id="pluginstabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <div></div>
+                                                            <div class="_formBlock">
+                                                                <h3 class="label">Plugins aren't currently enabled.</h3>
+                                                                <div class="main _formRoot"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="blocktabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <div class="_formBlock">
+                                                                <h3 class="label">This feature doesn't exist yet.</h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="apitabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <div class="_formBlock">
+                                                                <h3 class="label" style="color: crimson !important;">Using APIv4</h3>
+                                                                <h3 class="label">API Interactions are currently restricted.</h3>
+                                                                <label style="border-color: rgba(255, 89, 117, 0.15);">
+                                                                    <input type="radio" checked>
+                                                                    <span class="button">
+                                                                        <span></span>
+                                                                    </span>
+                                                                    <span class="label">Auto Migrate API Versions</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="webhooktabulatordisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <h3 class="label">Payload URL WIP</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div id="othersettingsdisplay" style="display: none;" class="tobesetnone">
+                                                        <div class="_formRoot">
+                                                            <h3 class="label">Additional Settings will appear here.</h3>
+                                                            <label style="border-color: rgba(255, 89, 117, 0.15);">
+                                                                <input type="radio">
+                                                                <span class="button">
+                                                                    <span></span>
+                                                                </span>
+                                                                <span class="label">BTRT</span>
+                                                            </label>
+                                                            <label style="border-color: rgba(255, 89, 117, 0.15);">
+                                                                <input type="radio">
+                                                                <span class="button">
+                                                                    <span></span>
+                                                                </span>
+                                                                <span class="label">DRYs</span>
+                                                            </label>
+                                                            <label style="border-color: rgba(255, 89, 117, 0.15);">
+                                                                <input type="radio" checked>
+                                                                <span class="button">
+                                                                    <span></span>
+                                                                </span>
+                                                                <span class="label">EFS</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+        <input type="file" id="pfpInput" accept="image/*" style="display: none;">
+        <input type="file" id="bannerInput" accept="image/*" style="display: none;">
+        <script>
+            const theUidToTargetNow = '<%- uid %>';
+        </script>
+
+
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+</html>

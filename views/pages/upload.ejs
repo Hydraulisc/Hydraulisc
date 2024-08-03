@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload | Hydraulisc</title>
+    <meta property="og:title" content="Hydraulisc - Stay in the loop">
+    <meta property="og:description" content="Sign In or Sign Up to continue | Hydraulisc">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/144374735">
+    <!-- Unused Canonical and alternate "link"'s removed: https://www.html-easy.com/references/html-link-tag/ & https://ahrefs.com/blog/canonical-tags/ -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/144374735">
+    <meta name="description" content="Stay in the loop, with Hydraulisc - where communities come together!">
+    <meta property="og:site_name" content="Hydraulisc - Stay in the loop">
+    <meta name="theme-color" content="rgba(33, 33, 33, 0.98)">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="manifest" href="/json/manifest.json">
+</head>
+<body>
+    <%- include('../partials/cookies', {cookies: cookies}) %>
+    <%- include('../partials/header', { username: username }) %>
+      
+    <div class="uploadHelp">
+      <h3>Chromium Users, Beware!</h3>
+      <p>This form <b><i>isn't</i> compatible</b> with <i>most</i> Chromium-Based Browsers! It will show "upload failed", <b>even</b> if it gets uploaded successfully!</p>
+    </div>
+    <div style="margin-top: 2px; margin-bottom: 6px;">
+      <b style="color: red;">Don't forget to read our <a style="color: crimson;" href="/guidelines">Guidelines</a> on content, and make sure you abide by our <a style="color: crimson;" href="/terms">ToS</a>!</b>
+    </div>
+    <br>
+    <% if (username) { %>
+      <!-- <form action="/api/v1/upload" method="POST" enctype="multipart/form-data"> -->
+        <form id="uploadForm" >
+        <div>
+          <label for="file">File</label>
+          <input type="file" id="file" name="file" accept="image/*" required>
+        </div>
+        <div>
+          <label for="descr">Add a caption!</label>
+          <input type="text" id="descr" name="descr" accept="text" required>
+        </div>
+        <p>Remember to use captions to capture your audience, describe your post and <a href="/hash/hash" style="color: aqua; text-decoration: none;">#hash</a> it!</p>
+      </form>
+      <button class="theTargetButton" type="submit" disabled>Select a file to begin upload</button>
+      <progress id="progressBar" style="display: none;" min="0" max="100" value="1"></progress>
+      <script>
+        const targetTracking = document.getElementById("uploadForm");
+        const fileInput = document.getElementById("file");
+        const button = document.querySelector('.theTargetButton');
+        const progressBar = document.getElementById('progressBar');
+        let k = progressBar.value;
+        
+        fileInput.addEventListener('change', () => {
+          if (fileInput.files.length > 0) {
+            const selectedFile = fileInput.files[0];
+            button.disabled = false;
+            button.innerHTML = "Upload";
+          }
+        });
+
+        button.addEventListener("click", () => {
+        const fileInput = document.getElementById("file");
+        const button = document.querySelector(".theTargetButton");
+        const progressBar = document.getElementById("progressBar");
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+        formData.append("descr", document.getElementById("descr").value);
+
+        button.disabled = true;
+        progressBar.style.display = "block";
+        count();
+
+        fetch("/api/v2/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {response.json();} )
+          .then((data) => {
+            // Handle the response
+            console.log(data);
+            button.innerText = "Upload Complete! Redirecting...";
+            if (data.uploadStatus === 'success') {
+              window.location.href = '/?uploadStatus=success&v2=false';
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            button.innerText = "Upload Failed";
+          });
+      });
+
+        function count(){
+          if(k < 100){
+              k = k + 1;
+              progressBar.value = k;
+          } else {
+            return console.log("The API timed-out! Try again?");
+          }
+          setTimeout("count()", 500);
+        }
+      </script>
+    <% } else { %>
+      <h3>You must be logged in to perform this action!</h3>
+    <% } %>
+    
+      
+    <%- include('../partials/footer', { username: username, uid: uid }) %>
+    <%- include('../partials/pwa') %>
+</body>
+</html>
