@@ -1,0 +1,33 @@
+{
+    "name": "The Hydraulisc Network",
+    "short_name": "Hydraulisc",
+    "description": "Social Networking, reengineered",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#12131a",
+    "theme_color": "#3367D6",
+    "icons": [
+      {
+        "src": "/pahez/icon.webp",
+        "sizes": "144x144",
+        "type": "image/webp"
+      },
+      {
+        "src": "/pahez/icon_512.webp",
+        "sizes": "512x512",
+        "type": "image/webp"
+      },
+      {
+        "src": "/pahez/icon_512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "/pahez/icon_512.webp",
+        "sizes": "512x512",
+        "type": "image/webp",
+        "purpose": "any maskable"
+      }
+    ]
+  }
+  

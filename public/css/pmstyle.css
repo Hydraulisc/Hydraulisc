@@ -1,0 +1,26 @@
+* {
+    user-select: none;
+}
+
+@media screen and (max-width: 768px){
+    .pmnavi {
+        margin-top: auto !important;
+    }
+}
+
+.pmnavi {
+    border-bottom: 1px solid #1d1f29;
+    min-height: 27px;
+    min-width: 100%;
+    margin-top: 4.3rem;
+}
+
+.userimage_container {
+    display: inline-flex;
+}
+
+.acc_username {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 6px;
+}

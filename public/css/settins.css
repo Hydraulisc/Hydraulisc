@@ -1,0 +1,228 @@
+/* mobile resizing cheat sheet */
+@media screen and (max-width: 768px){
+    .mainSetBody {
+        margin-top: 1rem !important;
+    }
+    .ezterEgg {
+        margin-top: -1rem !important;
+    }
+    .mySettingsTab .resizeToSmallerTextP {
+        font-size: small;
+    }
+    .bannerWrapper, .bannerContainer {
+        min-width: none !important;
+    }
+    .bannerWrapper, .settingsBanner {
+        height: 100px !important;
+    }
+    .usernameContainer {
+        display: none !important;
+    }
+    .profileUsernameContainer {
+        display: block !important;
+    }
+    .userTag {
+        margin-top: 8px !important;
+    }
+    .alternateKey {
+        top: -64px !important;
+        right: -156px !important;
+    }
+}
+
+.mainSetBody {
+    margin-top: 4.5rem;
+}
+
+.ezterEgg {
+    margin-top: -3rem;
+}
+
+.mySettingsTab {
+    box-sizing: border-box;
+    flex-direction: column;
+    display: flex;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.userInfoSet {
+    position: relative;
+    overflow: hidden;
+    background: #12131a;
+    border-radius: 12px;
+}
+
+.descriptions {
+    padding: 32px 0px 13px 24px;
+}
+
+.descriptions span {
+    white-space: pre-wrap;
+}
+
+.bannerWrapper, .bannerContainer {
+    max-width: 100%;
+    max-height: 250px;
+    
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.bannerContainer {
+    height: 100% !important;
+    box-shadow: 0 0 128px #00000080 inset !important;
+}
+
+.settingsBanner {
+    background-color: #5667C7;
+    box-sizing: border-box;
+    max-height: 250px;
+    height: 250px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.usernameSettings {
+    height: 72px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 16px 0 120px;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    border: 0;
+    font-size: 100% !important;
+}
+
+.profileUsernameContainer {
+    display: none;
+}
+
+.avatarStack {
+    width: 80px;
+    height: 80px;
+    background-color: #1C286B;
+    position: absolute;
+    left: 22px;
+    box-sizing: content-box;
+    border-radius: 50%;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.avatarMask {
+    width: 92px;
+    height: 92px;
+    box-sizing: border-box;
+    position: absolute;
+    contain: paint;
+    pointer-events: none;
+    display: block;
+    width: auto !important;
+}
+
+.avatara {
+    width: 80px;
+    height: 80px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.avatarb {
+    box-sizing: border-box;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.avatarb img::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.avatarb img {
+    box-sizing: border-box;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    grid-area: 1/1;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+}
+
+.usernameContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 0 8px 154px;
+    box-sizing: border-box;
+    color: #d7d9e0;
+    height: 61px;
+    background: linear-gradient(transparent, #12131a);
+}
+
+.userTag {
+    margin-bottom: 6px;
+    color: #d7d9e0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    align-items: flex-start;
+    white-space: nowrap;
+    outline: 0;
+    padding: 0;
+    border: 0;
+}
+
+.badgeList {
+    justify-content: flex-start;
+    padding: 4px 4px 4px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    min-height: 22px;
+    outline: 0;
+    margin: 0;
+    border-radius: 2px;
+    background-color: #7e7b7baa;
+}
+
+.alternateKey {
+    position: relative;
+    cursor: pointer;
+}
